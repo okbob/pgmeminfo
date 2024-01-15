@@ -1,0 +1,45 @@
+{
+   "name": "pgmeminfo",
+   "abstract": "Allow access to information about memory usage",
+   "description": "Allow access to information about memory usage",
+   "version": "1.0.0",
+   "maintainer": "Pavel STEHULE <pavel.stehule@gmail.com>",
+   "license": "bsd",
+   "provides": {
+      "plpgsql_check": {
+         "abstract": "Allow access to information about memory usag",
+         "file": "sql/meminfo.sql",
+         "docfile": "README.md",
+         "version": "1.0.0"
+      }
+   },
+   "prereqs": {
+      "runtime": {
+         "requires": {
+            "PostgreSQL": "12.0.0",
+            "plpgsql": 0
+        }
+      }
+   },
+   "resources": {
+      "bugtracker": {
+         "web": "https://github.com/okbob/pgmeminfo/issues/"
+      },
+      "repository": {
+        "url":  "git://github.com/okbob/pgmeminfo.git",
+        "web":  "https://github.com/okbob/pgmeminfo/",
+        "type": "git"
+      }
+   },
+   "generated_by": "David E. Wheeler",
+   "meta-spec": {
+      "version": "1.0.0",
+      "url": "http://pgxn.org/meta/spec.txt"
+   },
+   "tags": [
+      "meminfo",
+      "debug",
+      "resources",
+      "development",
+   ]
+}

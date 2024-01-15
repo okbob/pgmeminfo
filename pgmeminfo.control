@@ -1,0 +1,5 @@
+# pgmeminfo extension
+comment = 'show memory usage'
+default_version = '1.0'
+module_pathname = '$libdir/pgmeminfo'
+relocatable = false
