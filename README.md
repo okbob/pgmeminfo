@@ -27,6 +27,28 @@ Copyright (c) Pavel Stehule (pavel.stehule@gmail.com)
  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  THE SOFTWARE.
 
+# Installation
+
+You will probably need the "postgres.h" source file.  If you're using Debian
+or many other Linux distributions that use aptitude, installation is easy:
+
+    apt install postgres-server-dev-all
+
+Installation instructions:
+
+    git clone https://github.com/okbob/pgmeminfo/
+    cd pgmeminfo
+    make
+    make install
+
+Example usage (the "psql" command may require additional parameters such as a
+username and a database name):
+
+    psql
+    INSTALL EXTENSION pgmeminfo;
+    \x
+    SELECT * FROM pgmeminfo();
+
 # Note
 
 If you like it, send a postcard to address
