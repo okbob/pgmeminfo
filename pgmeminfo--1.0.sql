@@ -20,3 +20,18 @@ CREATE FUNCTION pgmeminfo(OUT arena int8, OUT ordblks int8, OUT smblks int8,
 RETURNS RECORD
 AS 'MODULE_PATHNAME','pgmeminfo'
 LANGUAGE C VOLATILE;
+
+
+CREATE FUNCTION pgmeminfo_contexts(IN deep int DEFAULT 0,
+                                   IN accum_mode text DEFAULT 'all',
+                                   OUT name text,
+                                   OUT ident text,
+                                   OUT parent text,
+                                   OUT level int,
+                                   OUT total_bytes int8,
+                                   OUT total_nblocks int8,
+                                   OUT free_bytes int8,
+                                   OUT used_bytes int8)
+RETURNS SETOF RECORD
+AS 'MODULE_PATHNAME','pgmeminfo_contexts'
+LANGUAGE C VOLATILE STRICT;

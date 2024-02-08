@@ -49,6 +49,13 @@ username and a database name):
     \x
     SELECT * FROM pgmeminfo();
 
+
+    SELECT * FROM pgmeminfo_contexts(); -- show cummulative size
+    SELECT * FROM pgmeminfo_contexts(deep => 1); -- show to deep 1
+
+    -- show all without accumulation
+    SELECT * FROM pgmeminfo_contexts(deep => -1, accum_mode => 'off');
+
 # Note
 
 If you like it, send a postcard to address
