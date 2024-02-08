@@ -32,7 +32,7 @@ Copyright (c) Pavel Stehule (pavel.stehule@gmail.com)
 You will probably need the "postgres.h" source file.  If you're using Debian
 or many other Linux distributions that use aptitude, installation is easy:
 
-    apt install postgres-server-dev-all
+    apt install postgresql-server-dev-all
 
 Installation instructions:
 
