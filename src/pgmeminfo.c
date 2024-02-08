@@ -127,6 +127,42 @@ pgmeminfo(PG_FUNCTION_ARGS)
 	PG_RETURN_DATUM(HeapTupleGetDatum(tuple));
 }
 
+/*
+ * This is analogy of MemoryContextMemConsumed function (PostgreSQL 17+)
+ * But it is reimplemented for support older pg
+ */
+static void
+pgmeminfo_MemoryContextMemConsumed(MemoryContext context,
+								   MemoryContextCounters *consumed)
+{
+	MemoryContextCounters stat;
+	MemoryContext child;
+	int			level;
+
+	memset(&stat, 0, sizeof(stat));
+
+#if PG_VERSION_NUM >= 140000
+
+	(*context->methods->stats) (context, NULL, (void *) &level, &stat, false);
+
+#else
+
+	(*context->methods->stats) (context, NULL, (void *) &level, &stat);
+
+#endif
+
+
+	for (child = context->firstchild; child != NULL; child = child->nextchild)
+	{
+		pgmeminfo_MemoryContextMemConsumed(child, &stat);
+	}
+
+	consumed->nblocks += stat.nblocks;
+	consumed->freechunks += stat.freechunks;
+	consumed->totalspace += stat.totalspace;
+	consumed->freespace += stat.freespace;
+}
+
 static void
 PutMemoryContextStatsTupleStore(AccumMode acm, int deep,
 								Tuplestorestate *tupstore, TupleDesc tupdesc,
@@ -149,9 +185,21 @@ PutMemoryContextStatsTupleStore(AccumMode acm, int deep,
 
 	memset(&stat, 0, sizeof(stat));
 	if (acm == ACCUM_ALL || (acm == ACCUM_LEAF && level == deep))
-		MemoryContextMemConsumed(context, &stat);
+		pgmeminfo_MemoryContextMemConsumed(context, &stat);
 	else
-		(*context->methods->stats) (context, NULL, (void *) &level, &stat, true);
+	{
+
+#if PG_VERSION_NUM >= 140000
+
+	(*context->methods->stats) (context, NULL, (void *) &level, &stat, false);
+
+#else
+
+	(*context->methods->stats) (context, NULL, (void *) &level, &stat);
+
+#endif
+
+	}
 
 	memset(values, 0, sizeof(values));
 	memset(nulls, 0, sizeof(nulls));
