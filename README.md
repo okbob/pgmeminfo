@@ -45,7 +45,7 @@ Example usage (the "psql" command may require additional parameters such as a
 username and a database name):
 
     psql
-    INSTALL EXTENSION pgmeminfo;
+    CREATE EXTENSION pgmeminfo;
     \x
     SELECT * FROM pgmeminfo();
 
