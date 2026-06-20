@@ -10,7 +10,7 @@
          "abstract": "Allow access to information about memory usag",
          "file": "sql/meminfo.sql",
          "docfile": "README.md",
-         "version": "1.0.0"
+         "version": "1.0.1"
       }
    },
    "prereqs": {
@@ -33,7 +33,7 @@
    },
    "generated_by": "David E. Wheeler",
    "meta-spec": {
-      "version": "1.0.0",
+      "version": "1.0.1",
       "url": "http://pgxn.org/meta/spec.txt"
    },
    "tags": [
