@@ -16,10 +16,12 @@
 
 #include "access/tupdesc.h"
 #include "access/htup.h"
+#include "access/htup_details.h"
 #include "catalog/pg_type.h"
 
 #include "mb/pg_wchar.h"
 #include "utils/builtins.h"
+#include "utils/tuplestore.h"
 
 #include <malloc.h>
 
